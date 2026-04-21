@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Huffman Compressor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="page">
+    <div class="card">
+      <header class="topbar">
+        <div class="topbar-left">
+          <span class="logo-dot"></span>
+          <span class="topbar-title">Huffman Compressor</span>
+        </div>
+        <div class="topbar-right">
+          <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+            <span class="theme-icon theme-icon-sun">☀</span>
+            <span class="theme-icon theme-icon-moon">☾</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <div class="hero appear">
+        <div class="hero-left">
+          <div class="badge">Lossless Compression</div>
+          <h1 class="hero-title">Huffman<br>Compressor</h1>
+          <p class="hero-subtitle">
+            Интерактивный инструмент для сжатия текста алгоритмом Хаффмана.
+            Введите текст, получите двоичный код, коэффициент сжатия и таблицу кодов символов.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" id="compressBtn">Сжать текст</button>
+            <button class="btn btn-secondary" id="decompressBtn">Восстановить</button>
+          </div>
+          <p class="hero-note">
+            Всё выполняется локально в браузере, без отправки данных на сервер.
+          </p>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-panel float">
+            <div class="hero-panel-header">
+              <span class="hero-panel-title">Исходный текст</span>
+              <span class="hero-panel-meta"><span id="originalLength">0</span> символов</span>
+            </div>
+            <textarea id="inputText" rows="6" placeholder="Напишите сюда текст, который хотите сжать..."></textarea>
+            <div class="hero-panel-actions">
+              <button class="btn btn-ghost" id="clearBtn">Очистить</button>
+              <div class="hero-panel-links">
+                <button class="link-btn" id="saveBtn">Сохранить .huff</button>
+                <button class="link-btn" id="loadBtn">Загрузить .huff</button>
+                <input type="file" id="fileInput" accept=".huff" style="display:none">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Метрики -->
+      <div class="section appear">
+        <div class="section-header">
+          <div class="section-title">Результат сжатия</div>
+          <div class="section-description">
+            Отслеживайте длину двоичного кода и коэффициент сжатия относительно исходного текста.
+          </div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric">
+            <div class="metric-label">Исходный текст</div>
+            <div class="metric-value">
+              <span id="originalLengthMetric">0</span> символов
+            </div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Сжатый код</div>
+            <div class="metric-value">
+              <span id="compressedLength">0</span> бит
+            </div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Коэффициент</div>
+            <div class="metric-value">
+              <span id="compressionRatio">0</span>x
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Двоичный код -->
+      <div class="section appear">
+        <div class="section-header">
+          <div class="section-title">Двоичный код</div>
+          <div class="section-description">
+            Сгенерированный битовый поток для вашего текста.
+          </div>
+        </div>
+        <div class="output-block mono" id="binaryOutput"></div>
+      </div>
+
+      <!-- Восстановленный текст -->
+      <div class="section appear">
+        <div class="section-header">
+          <div class="section-title">Восстановленный текст</div>
+          <div class="section-description">
+            Результат декодирования двоичного кода обратно в текст.
+          </div>
+        </div>
+        <div class="output-block" id="decodedOutput"></div>
+      </div>
+
+      <!-- Коды символов -->
+      <div class="section appear">
+        <div class="section-header">
+          <div class="section-title">Коды символов Хаффмана</div>
+          <div class="section-description">
+            Таблица соответствия символов и их кодов в дереве Хаффмана.
+          </div>
+        </div>
+        <div id="codesOutput" class="output-block mono"></div>
+      </div>
+
+      <div class="footer">
+        by <a href="https://github.com/spotter02" target="_blank" rel="noopener noreferrer">spotter02</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
